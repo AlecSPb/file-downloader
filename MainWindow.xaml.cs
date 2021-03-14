@@ -105,11 +105,11 @@ namespace FileDownloader
             }
             else if (CreateFileName().EndsWith(".txt"))
             {
-                thumbToUse = "Images/notepad.jpg";
+                thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\notepad.jpg";
             }
             else
             {
-                thumbToUse = "Images/doc_unknown.png";
+                thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\doc_unknown.png";
             }
 
             FileCollection.Add(new DownloadedFile()
@@ -139,11 +139,11 @@ namespace FileDownloader
                 }
                 else if (file.FullName.EndsWith(".txt"))
                 {
-                    thumbToUse = "Images/notepad.jpg";
+                    thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\notepad.jpg";
                 }
                 else
                 {
-                    thumbToUse = "Images/doc_unknown.png";
+                    thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\doc_unknown.png";
                 }
 
                 FileCollection.Add(new DownloadedFile()
