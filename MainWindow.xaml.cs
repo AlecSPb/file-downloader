@@ -144,7 +144,7 @@ namespace FileDownloader
                 }
                 else
                 {
-                    thumbToUse = "Images/doc_unknown.png";
+                    thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\doc_unknown.png";
                 }
 
                 FileCollection.Add(new DownloadedFile()
