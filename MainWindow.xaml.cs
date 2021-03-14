@@ -140,7 +140,7 @@ namespace FileDownloader
                 }
                 else if (file.FullName.EndsWith(".txt"))
                 {
-                    thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\notepad.jpg";
+                    thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\notepad.png";
                 }
                 else
                 {
