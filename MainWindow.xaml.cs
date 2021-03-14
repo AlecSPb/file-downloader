@@ -133,6 +133,7 @@ namespace FileDownloader
                 if (file.FullName.EndsWith(".jpg") ||
                     file.FullName.EndsWith(".png") ||
                     file.FullName.EndsWith(".bmp") ||
+                    file.FullName.EndsWith(".jpeg") ||
                     file.FullName.EndsWith(".gif"))
                 {
                     thumbToUse = file.FullName;
@@ -143,7 +144,7 @@ namespace FileDownloader
                 }
                 else
                 {
-                    thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\doc_unknown.png";
+                    thumbToUse = "Images/doc_unknown.png";
                 }
 
                 FileCollection.Add(new DownloadedFile()
