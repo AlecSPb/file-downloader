@@ -24,7 +24,7 @@ namespace FileDownloader
             ListBoxFiles.ItemsSource = FileCollection;
         }
 
-        //путь к папке, в которую сохраняются все файлы"
+        //путь к папке, в которую сохраняются все файлы
         private string filePath = @"C:\Users\vandr\Desktop\FileDownloader\Downloaded\";
 
         //скачивание файла
@@ -51,7 +51,7 @@ namespace FileDownloader
             return File.Exists(filePath + CreateFileName());
         }
 
-        //создание имена файла исходя из ссылки на него
+        //создание имени файла исходя из ссылки на него
         private string CreateFileName()
         {
             string tempName = "";
