@@ -8,7 +8,6 @@ using System.Net;
 using System.Windows.Input;
 using Microsoft.Win32;
 using System.Windows.Controls;
-using System.Linq;
 
 namespace FileDownloader
 {
@@ -21,6 +20,7 @@ namespace FileDownloader
             InitializeComponent();
 
             ProcessDownloadedFiles();
+
             ListBoxFiles.ItemsSource = FileCollection;
         }
 
@@ -78,25 +78,27 @@ namespace FileDownloader
             return fileName;
         }
 
+        //получение расширения для только что загруженного файла
         public string FileExtension()
         {
             string[] words = CreateFileName().Split('.');
             string extension = "." + words[words.Length - 1];
             return extension;
         }
-        //добавление загруженного файла в коллекцию всех файлов папки 
-        public void AddDownloadedFile()
+
+        //создание пути иконки
+        public string CreateThumbToUse(string extension, string fullname)
         {
             var thumbToUse = "";
 
-            switch (FileExtension())
+            switch (extension)
             {
                 case ".jpg":
                 case ".png":
                 case ".bmp":
                 case ".jpeg":
                 case ".gif":
-                    thumbToUse = filePath + CreateFileName(); break;
+                    thumbToUse = fullname; break;
                 case ".txt":
                     thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\txt.png"; break;
                 case ".doc":
@@ -142,12 +144,18 @@ namespace FileDownloader
                 default:
                     thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\file.png"; break;
             }
+            return thumbToUse;
+        }
+
+        //добавление загруженного файла в коллекцию всех файлов папки 
+        public void AddDownloadedFile()
+        {
 
             FileCollection.Add(new DownloadedFile()
             {
                 filePath = filePath + CreateFileName(),
                 fileName = CreateFileName(),
-                fileThumbnail = thumbToUse
+                fileThumbnail = CreateThumbToUse(FileExtension(), filePath + CreateFileName())
             });
         }
 
@@ -159,66 +167,11 @@ namespace FileDownloader
 
             foreach (var file in downloadedFiles)
             {
-                var thumbToUse = "";
-                switch(file.Extension)
-                {
-                    case ".jpg":
-                    case ".png": 
-                    case ".bmp":
-                    case ".jpeg":
-                    case ".gif": 
-                        thumbToUse = file.FullName; break;
-                    case ".txt": 
-                        thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\txt.png"; break;
-                    case ".doc":
-                        thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\doc.png"; break;
-                    case ".rtf":
-                        thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\rtf.png"; break;
-                    case ".pdf":
-                        thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\pdf.png"; break;
-                    case ".mp4":
-                        thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\mp4.png"; break;
-                    case ".avi":
-                        thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\avi.png"; break;
-                    case ".mp3":
-                        thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\mp3.png"; break;
-                    case ".css":
-                        thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\css.png"; break;
-                    case ".dbf":
-                        thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\dbf.png"; break;
-                    case ".dwg":
-                        thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\dwg.png"; break;
-                    case ".exe":
-                        thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\exe.png"; break;
-                    case ".fla":
-                        thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\fla.png"; break;
-                    case ".html":
-                        thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\html.png"; break;
-                    case ".iso":
-                        thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\iso.png"; break;
-                    case ".js":
-                        thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\javascript.png"; break;
-                    case ".json":
-                        thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\json-file.png"; break;
-                    case ".ppt":
-                    case ".pptx":
-                        thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\ppt.png"; break;
-                    case ".psd":
-                        thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\psd.png"; break;
-                    case ".xls":
-                    case ".xlsm":
-                        thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\xls.png"; break;
-                    case ".xml":
-                        thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\xml.png"; break;
-                    default: 
-                        thumbToUse = @"C:\Users\vandr\Desktop\FileDownloader\Images\file.png"; break;
-                }
-
                 FileCollection.Add(new DownloadedFile()
                 {
                     filePath = file.FullName,
                     fileName = file.Name,
-                    fileThumbnail = thumbToUse
+                    fileThumbnail = CreateThumbToUse(file.Extension, file.FullName)
                 });
             }
         }
